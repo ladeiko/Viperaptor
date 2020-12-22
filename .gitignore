@@ -1,0 +1,8 @@
+.idea/*
+.rakeTasks
+encodings.xml
+Gemfile.lock
+/.vscode/
+/pkg/
+*.DS_Store
+/vendor/
