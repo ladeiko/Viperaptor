@@ -17,6 +17,7 @@ module Viperaptor::CLI
     desc 'gen [MODULE_NAME] [TEMPLATE_NAME]', 'Creates a new VIPER module with a given name from a specific template'
     method_option :description, :aliases => '-d', :desc => 'Provides a full description to the module'
     method_option :author, :desc => 'Specifies the author name for generated module'
+    method_option :rambafile, :desc => 'Specifies Rambafile to use'
     method_option :project_targets, :desc => 'Specifies project targets for adding new module files'
     method_option :project_file_path, :desc => 'Specifies a location in the filesystem for new files'
     method_option :project_group_path, :desc => 'Specifies a location in Xcode groups for new files'
@@ -27,6 +28,9 @@ module Viperaptor::CLI
     method_option :test_path, :desc => 'Specifies a location (both in the filesystem and Xcode) for new test files'
     method_option :custom_parameters, :type => :hash, :default => {}, :desc => 'Specifies extra parameters in format `key1:value1 key2:value2` for usage during code generation'
     def gen(module_name = nil, template_name = nil)
+
+      Rambafile.use(options[:rambafile])
+
       does_rambafile_exist = Rambafile.exist
 
       unless does_rambafile_exist

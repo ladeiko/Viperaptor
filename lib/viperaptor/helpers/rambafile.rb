@@ -16,6 +16,10 @@ module Viperaptor
 
   class Rambafile
 
+    def self.use(name)
+      @@rambafile_name = name
+    end
+
     def self.exist
       Dir[RAMBAFILE_NAME + "*"].count > 0
     end
@@ -29,22 +33,30 @@ module Viperaptor
 
       if @@rambafile == nil
 
-        files = Dir[RAMBAFILE_NAME + "*"]
+        if @@rambafile_name == nil
 
-        if files.count == 0
-          puts("No Rambafile found".red)
-          exit
+          files = Dir[RAMBAFILE_NAME + "*"]
+
+          if files.count == 0
+            puts("No Rambafile found".red)
+            exit
+          end
+
+          if files.count == 1
+            @@rambafile_name = files[0]
+          else
+            prompt = TTY::Prompt.new
+            choices = files.sort
+            @@rambafile_name = prompt.select("Select Rambafile?", choices, per_page: choices.count)
+          end
+
         end
 
-        if files.count == 1
-          @@rambafile_name = files[0]
+        if @@rambafile_name.start_with?(RAMBAFILE_NAME)
+          @@rambafile_name_suffix = @@rambafile_name[RAMBAFILE_NAME.length..-1]
         else
-          prompt = TTY::Prompt.new
-          choices = files.sort
-          @@rambafile_name = prompt.select("Select Rambafile?", choices, per_page: choices.count)
+          @@rambafile_name_suffix = "_" + @@rambafile_name
         end
-
-        @@rambafile_name_suffix = @@rambafile_name[RAMBAFILE_NAME.length..-1]
 
         self.validate
         @@rambafile = YAML.load_file(@@rambafile_name)
