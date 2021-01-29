@@ -22,7 +22,7 @@ module Viperaptor
       preferences = file_contents.empty? ? {} : YAML.load(file_contents).to_hash
 
       history = preferences[USER_PREFERENCES_TEMPLATES_HISTORY_KEY] || []
-      if history.count == 0 && history[0] != template_name
+      if history.count == 0 || history[0] != template_name
         history.unshift(template_name)
         max_history = 60
         if history.count > max_history
