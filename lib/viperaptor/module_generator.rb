@@ -74,7 +74,7 @@ module Viperaptor
 				file_group = File.dirname(file[TEMPLATE_NAME_KEY])
 				file_group = nil if file_group == '.'
 
-				module_info = ModuleInfoGenerator.new(code_module)
+				module_info = ModuleInfoGenerator.new(code_module, template.variables)
 
 				# Generating the content of the code file and it's name
 				file_name, file_content = ContentGenerator.create_file(file, module_info.scope, template)

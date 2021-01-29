@@ -1,4 +1,5 @@
 require 'viperaptor/helpers/template_helper.rb'
+require "tty-prompt"
 
 module Viperaptor
 
@@ -16,6 +17,22 @@ module Viperaptor
         spec_template = Liquid::Template.parse(spec_source)
         spec_content = spec_template.render(options)
         spec = YAML.load(spec_content)
+      end
+
+      variables = spec[TEMPLATE_VARIABLES_KEY]
+      @variables = {}
+      unless variables.nil?
+        variables.map do |desc|
+          if !desc["single_select"].nil?
+            prompt = TTY::Prompt.new
+            choices = desc["single_select"]
+            value = prompt.select("Select #{desc["description"]}?", choices, per_page: choices.count)
+            @variables[desc["name"]] = value
+          else
+            puts("ERROR: Invalid variable type of template custom variable #{desc.name}".red)
+            exit(1)
+          end
+        end
       end
 
       @code_files = spec[TEMPLATE_CODE_FILES_KEY]
