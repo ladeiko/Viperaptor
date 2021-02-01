@@ -13,7 +13,7 @@ module Viperaptor
   TEMPLATE_FILE_CUSTOM_NAME_KEY = 'custom_name'
   TEMPLATE_FILE_PATH_KEY = 'path'
   TEMPLATE_FILE_IS_RESOURCE_KEY = 'is_resource'
-  TEMPLATE_VARIABLES_KEY = 'variables'
+  TEMPLATE_CUSTOM_PARAMETERS_KEY = 'custom_parameters'
 
   TEMPLATE_DEPENDENCIES_KEY = 'dependencies'
 end

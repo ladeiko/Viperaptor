@@ -105,7 +105,7 @@ module Viperaptor::CLI
       module_validator = ModuleValidator.new
       module_validator.validate(code_module)
 
-      module_info = ModuleInfoGenerator.new(code_module, template.variables)
+      module_info = ModuleInfoGenerator.new(code_module)
       template = ModuleTemplate.new(template_name, module_info.scope)
 
       parameters = GenCommandTableParametersFormatter.prepare_parameters_for_displaying(code_module, template_name)

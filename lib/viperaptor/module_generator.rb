@@ -9,6 +9,7 @@ module Viperaptor
 	class ModuleGenerator
 
 		def generate_module(name, code_module, template)
+
 			# Setting up Xcode objects
 			project = XcodeprojHelper.obtain_project(code_module.xcodeproj_path)
 
@@ -74,7 +75,7 @@ module Viperaptor
 				file_group = File.dirname(file[TEMPLATE_NAME_KEY])
 				file_group = nil if file_group == '.'
 
-				module_info = ModuleInfoGenerator.new(code_module, template.variables)
+				module_info = ModuleInfoGenerator.new(code_module)
 
 				# Generating the content of the code file and it's name
 				file_name, file_content = ContentGenerator.create_file(file, module_info.scope, template)

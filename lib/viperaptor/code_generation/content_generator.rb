@@ -9,9 +9,14 @@ module Viperaptor
     # @param file [Hash<String,String>] A hashmap with template's filename and filepath
     # @param scope [Hash<String,String>] A hashmap with module info
     # @param template [ModuleTemplate] The model describing a Viperaptor template used for code generation
+		# @param variables [Hash<String,String>] Custom variables of template
     #
     # @return [String], [String] The generated file_name and body
 		def self.create_file(file, scope, template)
+
+			custom_parameters = template.custom_parameters
+			scope['custom_parameters'] = (scope['custom_parameters'] || {}).merge(custom_parameters)
+
 			file_source = IO.read(template.template_path.join(file[TEMPLATE_FILE_PATH_KEY]))
 			Liquid::Template.file_system = Liquid::LocalFileSystem.new(template.template_path.join('snippets'), '%s.liquid')
 
@@ -21,7 +26,7 @@ module Viperaptor
 			file_basename = File.basename(file[TEMPLATE_FILE_NAME_KEY])
 
 			module_info = scope['module_info']
-			
+
 			module_info['file_basename'] = file_basename
 
 			file_name = filename_template.render(scope)
