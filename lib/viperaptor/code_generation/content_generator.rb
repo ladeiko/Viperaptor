@@ -14,7 +14,7 @@ module Viperaptor
     # @return [String], [String] The generated file_name and body
 		def self.create_file(file, scope, template)
 
-			custom_parameters = template.custom_parameters
+			custom_parameters = template.custom_parameters || {}
 			scope['custom_parameters'] = (scope['custom_parameters'] || {}).merge(custom_parameters)
 
 			file_source = IO.read(template.template_path.join(file[TEMPLATE_FILE_PATH_KEY]))
