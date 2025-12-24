@@ -20,12 +20,12 @@ Gem::Specification.new do |spec|
 
   spec.required_ruby_version = '>= 2.3'
 
-  spec.add_runtime_dependency 'thor', '1.2.1'
-  spec.add_runtime_dependency 'xcodeproj', '1.22.0'
-  spec.add_runtime_dependency 'liquid', '5.4.0'
-  spec.add_runtime_dependency 'git', '1.13.0'
-  spec.add_runtime_dependency 'cocoapods-core', '1.11.3'
-  spec.add_runtime_dependency 'terminal-table', '3.0.2'
+  spec.add_runtime_dependency 'thor', '~> 1.2.1'
+  spec.add_runtime_dependency 'xcodeproj', '~> 1.22.0'
+  spec.add_runtime_dependency 'liquid', '~> 5.4.0'
+  spec.add_runtime_dependency 'git', '~> 1.13.0'
+  spec.add_runtime_dependency 'cocoapods-core', '~> 1.11.3'
+  spec.add_runtime_dependency 'terminal-table', '~> 3.0.2'
   spec.add_runtime_dependency 'tty-prompt', '~> 0.23.1'
 
   spec.add_development_dependency 'bundler', '>= 1.16'
